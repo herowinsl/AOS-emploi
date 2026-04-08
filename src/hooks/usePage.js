@@ -1,0 +1,1 @@
+//WP page by slug
