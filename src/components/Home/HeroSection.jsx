@@ -53,10 +53,11 @@ function HeroSection() {
               <h1
                 className={`mt-5 text-4xl md:text-5xl ${isArabic ? "font-semibold" : "font-bold"}`}
               >
-                {headline[0]}{" "}
-                <span className="text-brand-orange">{headline[1]}</span>{" "}
-                {headline[2]}
+                <span>{headline[0]}</span>
+                <span className="text-brand-orange mx-1">{headline[1]}</span>
+                <span className="block mt-4">{headline[2]}</span>
               </h1>
+         
               <p className="mt-5 max-w-2xl text-base text-gray-200">
                 {subline}
               </p>
