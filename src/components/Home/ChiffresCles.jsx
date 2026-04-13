@@ -85,15 +85,14 @@ function ChiffresCles() {
         </div>
 
         {/* Timeline + Cards */}
-        <div className="mt-12 md:mt-16">
+        <div className="mt-12 md:mt-16 relative">
           {/* Timeline line — hidden on mobile */}
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="hidden md:block absolute mx-auto w-3/4 h-px bg-gray-200 origin-left"
-            style={{ marginLeft: "12.5%" }}
+            className="hidden md:block absolute top-0 left-[12.5%] right-[12.5%] h-px bg-gray-200 origin-center"
           />
 
           <div className="grid gap-6 md:grid-cols-4 relative">
@@ -109,7 +108,7 @@ function ChiffresCles() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    className="hidden md:flex absolute top-0 left-1/2 -translate-x-1/2 z-10 h-4 w-4 rounded-full bg-navy items-center justify-center"
+                    className="hidden md:flex absolute -top-2 left-1/2 -translate-x-1/2 z-10 h-4 w-4 rounded-full bg-navy items-center justify-center"
                   >
                     <div className="h-1.5 w-1.5 rounded-full bg-white" />
                   </motion.div>
@@ -121,7 +120,7 @@ function ChiffresCles() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-80px" }}
-                    className="w-full pt-6 md:pt-12 text-center"
+                    className="w-full pt-6 md:pt-10 text-center"
                   >
                     <div className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                       <motion.div
