@@ -3,7 +3,7 @@ import Footer from "./Footer";
 
 function PageWrapper({ children }) {
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="min-h-screen bg-navy text-gray-900">
       <Navbar />
       <main>{children}</main>
       <Footer />

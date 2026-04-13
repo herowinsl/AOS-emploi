@@ -20,7 +20,7 @@ function HeroSection() {
   const visual = heroVisualContent[lang];
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-navy text-white">
+    <section className="relative h-dvh overflow-hidden bg-navy text-white">
       <div className="pointer-events-none absolute inset-0">
         <div
           className="absolute inset-0 bg-gradient-to-b from-navy to-navy-dark"
@@ -43,39 +43,39 @@ function HeroSection() {
           aria-hidden
         />
       </div>
-      <div className="relative flex min-h-screen items-center">
-        <div className="max-w-7xl mx-auto w-full px-4 py-24 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <div>
+      <div className="relative flex h-dvh items-center">
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center gap-8 lg:grid lg:grid-cols-2 lg:items-center lg:gap-12">
+            <div className="text-center lg:text-start">
               <span className="inline-flex rounded-full border border-white/20 px-3 py-1 text-xs font-medium text-white/90">
                 {badge}
               </span>
               <h1
-                className={`mt-5 text-4xl md:text-5xl ${isArabic ? "font-semibold" : "font-bold"}`}
+                className={`mt-4 text-3xl md:text-4xl lg:text-5xl ${isArabic ? "font-semibold" : "font-bold"}`}
               >
                 <span>{headline[0]}</span>
                 <span className="text-brand-orange mx-1">{headline[1]}</span>
-                <span className="block mt-4">{headline[2]}</span>
+                <span className="block mt-3">{headline[2]}</span>
               </h1>
-         
-              <p className="mt-5 max-w-2xl text-base text-gray-200">
+
+              <p className="mt-4 max-w-xl mx-auto lg:mx-0 text-sm md:text-base text-gray-200">
                 {subline}
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
+              <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
                 <Link
                   to={hero.cta_primary_href}
-                  className="rounded-lg bg-brand-orange px-5 py-3 text-sm font-semibold text-white hover:bg-navy-light transition-colors duration-150"
+                  className="rounded-lg bg-brand-orange px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy-light transition-colors duration-150"
                 >
                   {primaryLabel}
                 </Link>
                 <Link
                   to={hero.cta_secondary_href}
-                  className="rounded-lg border border-white/30 bg-white/10 px-5 py-3 text-sm font-semibold text-white hover:bg-white/20 transition-colors duration-150"
+                  className="rounded-lg border border-white/30 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/20 transition-colors duration-150"
                 >
                   {secondaryLabel}
                 </Link>
               </div>
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start">
                 {visual.chips.map((chip) => (
                   <span
                     key={chip}
@@ -86,7 +86,9 @@ function HeroSection() {
                 ))}
               </div>
             </div>
-            <HeroInfoPanel content={visual} />
+            <div className="w-full overflow-x-auto pb-2 lg:overflow-x-visible lg:pb-0">
+              <HeroInfoPanel />
+            </div>
           </div>
         </div>
       </div>

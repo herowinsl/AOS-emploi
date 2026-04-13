@@ -24,19 +24,23 @@ function HomePage() {
   return (
     <PageWrapper>
       <HeroSection />
+      <div className="h-px bg-gradient-to-r from-transparent via-navy/20 to-transparent" />
       <ChiffresCles />
+      <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
       <ActualitesSection
         posts={posts}
         loading={postsLoading}
         error={postsError}
         onRetry={retryPosts}
       />
+      <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
       <ServicesSection
         services={services}
         loading={servicesLoading}
         error={servicesError}
         onRetry={retryServices}
       />
+      <div className="h-px bg-gradient-to-r from-transparent via-navy/20 to-transparent" />
       <CTABanner />
     </PageWrapper>
   );

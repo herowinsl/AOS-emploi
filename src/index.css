@@ -17,3 +17,31 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* ─── Services marquee ──────────────────────────────────────────────────── */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee-scroll 35s linear infinite;
+  animation-delay: -8s;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Slower on touch devices where hover pause isn't available */
+@media (max-width: 640px) {
+  .marquee-track {
+    animation-duration: 90s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation-play-state: paused;
+  }
+}

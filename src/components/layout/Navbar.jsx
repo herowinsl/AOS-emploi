@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLang } from "../../context/LangContext";
 import logo from "../../../public/logo.png";
 
@@ -35,26 +35,56 @@ function Navbar() {
   const { lang, setLang } = useLang();
   const t = content[lang];
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  /* Mobile menu scroll effect */
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/20 bg-white/40 shadow-sm shadow-black/5 backdrop-blur">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex min-h-16 items-center justify-between gap-4">
+    <header
+      className={`sticky z-50 transition-all duration-300 ease-out ${
+        scrolled && !isMobileMenuOpen
+          ? "top-4 mx-auto max-w-[calc(100%-2rem)] rounded-xl bg-white/90 border border-gray-200/60 shadow-md shadow-black/5 backdrop-blur"
+          : "top-0 w-full bg-white/80 border-b border-white/20 shadow-sm shadow-black/5 backdrop-blur"
+      }`}
+    >
+      <div
+        className={
+          scrolled
+            ? "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+            : "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        }
+      >
+        <div
+          className={`flex items-center justify-between gap-4 transition-all duration-300 ease-out ${scrolled ? "min-h-12" : "min-h-16"}`}
+        >
           <Link
             to="/"
-            className="flex items-center gap-2 text-lg font-bold text-navy"
+            className="flex items-center gap-2 text-lg font-bold text-navy transition-transform duration-300"
           >
             <img
               src={logo}
               alt={t.brand}
-              className="h-14 w-auto"
-              style={{ maxHeight: "56px" }}
+              className={`w-auto transition-all duration-300 ${scrolled ? "h-10" : "h-14"}`}
             />
             <span className="sr-only">{t.brand}</span>
           </Link>
 
+          {/* Desktop nav */}
           <nav className="hidden items-center gap-6 lg:flex">
             {t.links.map((link) => (
               <NavLink
@@ -62,7 +92,9 @@ function Navbar() {
                 to={link.to}
                 className={({ isActive }) =>
                   `text-sm font-medium transition-colors duration-150 ${
-                    isActive ? "text-navy" : "text-gray-600 hover:text-gray-900"
+                    isActive
+                      ? "text-black font-semibold"
+                      : "text-gray-600 hover:text-gray-900"
                   }`
                 }
               >
@@ -74,7 +106,7 @@ function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               to="/espace-adherent"
-              className="hidden rounded-lg bg-navy px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-navy-light md:inline-flex"
+              className="hidden rounded-lg bg-navy px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-navy-light md:inline-flex"
             >
               {t.adhherent}
             </Link>
@@ -108,7 +140,7 @@ function Navbar() {
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen((value) => !value)}
-              className="inline-flex rounded-lg border border-gray-200/70 p-2 text-gray-700 transition-colors duration-150 hover:text-gray-900 lg:hidden"
+              className="inline-flex rounded-lg border border-gray-200/70 p-2 text-gray-700 transition-all duration-300 hover:text-gray-900 lg:hidden"
               aria-expanded={isMobileMenuOpen}
               aria-label={
                 isMobileMenuOpen
@@ -116,14 +148,21 @@ function Navbar() {
                   : "Open navigation menu"
               }
             >
-              {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+              <span
+                className={`block transition-transform duration-300 ${isMobileMenuOpen ? "rotate-90 scale-110" : "rotate-0 scale-100"}`}
+              >
+                {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+              </span>
             </button>
           </div>
         </div>
 
+        {/* Mobile menu */}
         <div
-          className={`overflow-hidden transition-all duration-200 lg:hidden ${
-            isMobileMenuOpen ? "max-h-96 pb-4 opacity-100" : "max-h-0 opacity-0"
+          className={`overflow-hidden transition-all duration-300 ease-out lg:hidden ${
+            isMobileMenuOpen
+              ? "max-h-[480px] pb-4 opacity-100"
+              : "max-h-0 opacity-0"
           }`}
         >
           <nav className="grid gap-1 rounded-xl border border-gray-200/70 bg-white p-2 shadow-sm shadow-black/5">
