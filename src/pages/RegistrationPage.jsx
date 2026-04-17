@@ -1,11 +1,11 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LangContext } from '../context/LangContext';
+import { useLang } from '../context/LangContext';
 import { wpApi } from '../services/api';
 import Button from '../components/common/Button';
 
 const RegistrationPage = () => {
-  const { lang } = useContext(LangContext);
+  const { lang } = useLang();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');

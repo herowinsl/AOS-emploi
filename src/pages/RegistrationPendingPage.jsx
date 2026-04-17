@@ -1,10 +1,10 @@
-import { useContext, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { LangContext } from '../context/LangContext';
+import { useLang } from '../context/LangContext';
 import Button from '../components/common/Button';
 
 const RegistrationPendingPage = () => {
-  const { lang } = useContext(LangContext);
+  const { lang } = useLang();
   const navigate = useNavigate();
   const location = useLocation();
   const email = location.state?.email || '';
