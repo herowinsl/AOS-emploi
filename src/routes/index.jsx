@@ -5,6 +5,9 @@ import ServicesPage from "../pages/ServicesPage";
 import PortfolioPage from "../pages/PortfolioPage";
 import BlogPage from "../pages/BlogPage";
 import ContactPage from "../pages/ContactPage";
+import RegistrationPage from "../pages/RegistrationPage";
+import RegistrationPendingPage from "../pages/RegistrationPendingPage";
+import SignInPage from "../pages/SignInPage";
 import EspaceAdherentPage from "../pages/EspaceAdherentPage";
 import NotFoundPage from "../pages/NotFoundPage";
 
@@ -18,6 +21,9 @@ export function AppRoutes() {
       <Route path="/blog" element={<BlogPage />} />
       <Route path="/blog/:slug" element={<Navigate to="/blog" replace />} />
       <Route path="/contact" element={<ContactPage />} />
+      <Route path="/register" element={<RegistrationPage />} />
+      <Route path="/registration-pending" element={<RegistrationPendingPage />} />
+      <Route path="/signin" element={<SignInPage />} />
       <Route path="/espace-adherent" element={<EspaceAdherentPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
