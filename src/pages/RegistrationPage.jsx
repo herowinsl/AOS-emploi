@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLang } from '../context/LangContext';
 import { wpApi } from '../services/api';
 import Button from '../components/common/Button';
+import PageWrapper from '../components/layout/PageWrapper';
 
 const RegistrationPage = () => {
   const { lang } = useLang();
@@ -133,96 +134,98 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          {strings.title}
-        </h1>
-        <p className="text-gray-600 mb-8">
-          {strings.subtitle}
-        </p>
+    <PageWrapper>
+      <div className="min-h-[calc(100vh-80px)] bg-gray-50 flex items-center justify-center py-12 px-4">
+        <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            {strings.title}
+          </h1>
+          <p className="text-gray-600 mb-8">
+            {strings.subtitle}
+          </p>
 
-        {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded text-red-700 text-sm">
-            {error}
-          </div>
-        )}
+          {error && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded text-red-700 text-sm">
+              {error}
+            </div>
+          )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="nom" className="block text-sm font-medium text-gray-700 mb-1">
-              {strings.name}
-            </label>
-            <input
-              type="text"
-              id="nom"
-              name="nom"
-              value={formData.nom}
-              onChange={handleChange}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="nom" className="block text-sm font-medium text-gray-700 mb-1">
+                {strings.name}
+              </label>
+              <input
+                type="text"
+                id="nom"
+                name="nom"
+                value={formData.nom}
+                onChange={handleChange}
+                disabled={loading}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+                placeholder="John Doe"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                {strings.email}
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                disabled={loading}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+                placeholder="john@example.com"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="lieu_de_travail" className="block text-sm font-medium text-gray-700 mb-1">
+                {strings.location}
+              </label>
+              <input
+                type="text"
+                id="lieu_de_travail"
+                name="lieu_de_travail"
+                value={formData.lieu_de_travail}
+                onChange={handleChange}
+                disabled={loading}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+                placeholder="Paris"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="tel" className="block text-sm font-medium text-gray-700 mb-1">
+                {strings.phone}
+              </label>
+              <input
+                type="tel"
+                id="tel"
+                name="tel"
+                value={formData.tel}
+                onChange={handleChange}
+                disabled={loading}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+                placeholder="+33 1 23 45 67 89"
+              />
+            </div>
+
+            <Button
+              type="submit"
               disabled={loading}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
-              placeholder="John Doe"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              {strings.email}
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              disabled={loading}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
-              placeholder="john@example.com"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="lieu_de_travail" className="block text-sm font-medium text-gray-700 mb-1">
-              {strings.location}
-            </label>
-            <input
-              type="text"
-              id="lieu_de_travail"
-              name="lieu_de_travail"
-              value={formData.lieu_de_travail}
-              onChange={handleChange}
-              disabled={loading}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
-              placeholder="Paris"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="tel" className="block text-sm font-medium text-gray-700 mb-1">
-              {strings.phone}
-            </label>
-            <input
-              type="tel"
-              id="tel"
-              name="tel"
-              value={formData.tel}
-              onChange={handleChange}
-              disabled={loading}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
-              placeholder="+33 1 23 45 67 89"
-            />
-          </div>
-
-          <Button
-            type="submit"
-            disabled={loading}
-            className="w-full mt-6"
-          >
-            {loading ? strings.submitting : strings.submit}
-          </Button>
-        </form>
+              className="w-full mt-6"
+            >
+              {loading ? strings.submitting : strings.submit}
+            </Button>
+          </form>
+        </div>
       </div>
-    </div>
+    </PageWrapper>
   );
 };
 
