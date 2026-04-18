@@ -1,5 +1,7 @@
 export const servicesDetails = {
   "aide-sociale": {
+    icon: "HeartHandshake",
+
     fr: {
       title: "Aide Sociale",
       description: "L'AOS accompagne les adhérents confrontés à des situations sociales difficiles ou imprévues à travers un soutien financier et moral adapté.",
@@ -46,6 +48,8 @@ export const servicesDetails = {
     }
   },
   "couverture-medicale": {
+    icon: "Stethoscope",
+
     fr: {
       title: "Couverture Médicale",
       description: "Un système de couverture complémentaire pour alléger les charges médicales des fonctionnaires et de leurs familles.",
@@ -96,6 +100,8 @@ export const servicesDetails = {
     }
   },
   "aide-scolaire": {
+    icon: "GraduationCap",
+
     fr: {
       title: "Aide à la Scolarisation",
       description: "Soutien direct aux familles pour assurer la réussite scolaire de leurs enfants.",
@@ -142,6 +148,8 @@ export const servicesDetails = {
     }
   },
   "activites-culturelles": {
+    icon: "Trophy",
+
     fr: {
       title: "Activités Culturelles & Sportives",
       description: "Promotion de l'épanouissement personnel et de la cohésion sociale entre les adhérents.",
@@ -190,6 +198,8 @@ export const servicesDetails = {
     }
   },
   "prets-exceptionnels": {
+    icon: "Banknote",
+
     fr: {
       title: "Prêts & Avances",
       description: "Dispositif d'avance financière sans intérêts avec un plafond augmenté pour répondre à vos besoins.",
@@ -238,6 +248,8 @@ export const servicesDetails = {
     }
   },
   "soutien-deces": {
+    icon: "Ribbon",
+
     fr: {
       title: "Soutien au Décès (Taazia)",
       description: "Une allocation solidaire pour soutenir les familles lors de la perte d'un proche.",
@@ -286,6 +298,8 @@ export const servicesDetails = {
     }
   },
   "retraite-accompagnement": {
+    icon: "BookOpen",
+
     fr: {
       title: "Accompagnement à la Retraite",
       description: "Honorer nos retraités et assurer leur transition avec dignité.",
@@ -330,6 +344,8 @@ export const servicesDetails = {
     }
   },
   "logement-vacances": {
+    icon: "Home",
+
     fr: {
       title: "Logements de Vacances",
       description: "Offrir des séjours de qualité à des tarifs préférentiels.",

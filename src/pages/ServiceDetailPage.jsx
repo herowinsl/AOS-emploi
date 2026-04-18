@@ -1,9 +1,10 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronLeft, CheckCircle2 } from "lucide-react";
+import * as Icons from "lucide-react";
 import PageWrapper from "../components/layout/PageWrapper";
 import { useLang } from "../context/LangContext";
 import { servicesDetails } from "../data/servicesDetails";
+import { cn } from "../lib/utils";
 
 function ServiceDetailPage() {
   const { slug } = useParams();
@@ -16,12 +17,28 @@ function ServiceDetailPage() {
 
   const content = service[lang];
   const isArabic = lang === "ar";
+  const Icon = Icons[service.icon] || Icons.Circle;
 
   const labels = {
-    fr: { back: "Retour aux services", contact: "Plus d'informations ?", cta: "Contactez-nous" },
+    fr: { back: "Retour aux services", contact: "Plus d'informations ?", cta: "Nous contacter" },
     ar: { back: "العودة إلى الخدمات", contact: "لمزيد من المعلومات ؟", cta: "اتصل بنا" },
   };
   const t = labels[lang];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
 
   return (
     <PageWrapper>
@@ -32,57 +49,71 @@ function ServiceDetailPage() {
             to="/services"
             className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-navy transition-colors mb-8 group"
           >
-            <ChevronLeft className={cn("w-4 h-4 transition-transform group-hover:-translate-x-1", isArabic && "rotate-180 group-hover:translate-x-1")} />
+            <Icons.ChevronLeft className={cn("w-4 h-4 transition-transform group-hover:-translate-x-1", isArabic && "rotate-180 group-hover:translate-x-1")} />
             <span className="ms-1">{t.back}</span>
           </Link>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white rounded-3xl shadow-xl shadow-navy/5 overflow-hidden border border-gray-100"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="bg-white rounded-[2.5rem] shadow-2xl shadow-navy/5 overflow-hidden border border-gray-100"
           >
-            {/* Header section with solid navy bar */}
-            <div className="h-2 bg-navy" />
-            
-            <div className="p-8 md:p-12">
-              <h1 className={cn("text-3xl md:text-4xl text-navy mb-6", isArabic ? "font-semibold" : "font-bold")}>
-                {content.title}
-              </h1>
+            {/* Header Section */}
+            <div className="relative p-8 md:p-12 pb-0 md:pb-0">
+              <div className="flex flex-col md:flex-row md:items-center gap-6 mb-8">
+                <div className="w-16 h-16 rounded-2xl bg-navy/5 flex items-center justify-center text-navy shrink-0">
+                  <Icon className="w-8 h-8" />
+                </div>
+                <div>
+                  <h1 className={cn("text-3xl md:text-5xl text-navy mb-3", isArabic ? "font-semibold" : "font-bold tracking-tight")}>
+                    {content.title}
+                  </h1>
+                  <div className="h-1.5 w-20 bg-orange-500 rounded-full" />
+                </div>
+              </div>
               
-              <p className="text-lg text-gray-600 leading-relaxed mb-12">
+              <p className="text-xl text-gray-600 leading-relaxed max-w-3xl">
                 {content.description}
               </p>
+            </div>
 
-              <div className="space-y-12">
+            <div className="p-8 md:p-12 pt-12 md:pt-16">
+              <div className="space-y-16">
                 {content.sections.map((section, idx) => (
-                  <div key={idx} className="animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200">
-                    <h2 className={cn("text-xl text-navy mb-6 flex items-center", isArabic ? "font-semibold" : "font-bold")}>
-                      <span className="w-1.5 h-6 bg-orange-500 rounded-full me-3" />
+                  <motion.div key={idx} variants={itemVariants}>
+                    <h2 className={cn("text-2xl text-navy mb-8 flex items-center gap-3", isArabic ? "font-semibold" : "font-bold")}>
+                      <span className="w-2 h-2 rounded-full bg-navy/20" />
                       {section.title}
                     </h2>
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {section.content.map((item, itemIdx) => (
-                        <li key={itemIdx} className="flex items-start gap-3 p-4 rounded-2xl bg-gray-50 border border-gray-100/50">
-                          <CheckCircle2 className="w-5 h-5 text-navy mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-700 text-sm leading-relaxed">{item}</span>
+                        <li key={itemIdx} className="group flex items-start gap-4 p-5 rounded-2xl bg-gray-50 hover:bg-white border border-gray-100/50 hover:border-navy/10 hover:shadow-lg hover:shadow-navy/5 transition-all duration-300">
+                          <Icons.CheckCircle2 className="w-5 h-5 text-navy/40 group-hover:text-navy mt-1 flex-shrink-0 transition-colors" />
+                          <span className="text-gray-700 text-[0.95rem] leading-relaxed font-medium">{item}</span>
                         </li>
                       ))}
                     </ul>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 
-              {/* Contact / Footer bar */}
-              <div className="mt-16 pt-8 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6">
-                <p className="text-gray-500 font-medium">{t.contact}</p>
+              {/* Contact Footer */}
+              <motion.div 
+                variants={itemVariants}
+                className="mt-20 p-8 rounded-[2rem] bg-navy text-white flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-start"
+              >
+                <div>
+                  <p className="text-navy-100 text-sm font-medium uppercase tracking-wider mb-1">{t.contact}</p>
+                  <p className="text-xl font-semibold">{isArabic ? "نحن هنا لمساعدتكم في كل خطوة" : "Nous sommes là pour vous accompagner"}</p>
+                </div>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center px-8 py-3 bg-navy text-white rounded-xl font-bold hover:bg-navy-light transition-all shadow-lg shadow-navy/20 hover:scale-[1.02]"
+                  className="inline-flex items-center px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-xl font-bold transition-all shadow-xl shadow-orange-500/20 hover:scale-[1.05] active:scale-95 whitespace-nowrap"
                 >
                   {t.cta}
                 </Link>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
@@ -91,9 +122,5 @@ function ServiceDetailPage() {
   );
 }
 
-// Helper for conditional classes
-function cn(...inputs) {
-  return inputs.filter(Boolean).join(" ");
-}
-
 export default ServiceDetailPage;
+
