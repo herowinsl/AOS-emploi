@@ -19,48 +19,65 @@ const DocumentsSection = () => {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h2 className={`text-2xl text-navy ${isArabic ? "font-semibold" : "font-bold"}`}>
             {t.title}
           </h2>
           <p className="mt-1 text-gray-500">{t.description}</p>
         </div>
-        
-        <div className="relative">
-          <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
-          <input 
-            type="text" 
+
+        <div className="relative w-full md:w-72">
+          <Search className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
             placeholder={isArabic ? "بحث عن وثيقة..." : "Rechercher un document..."}
-            className="ps-10 pe-4 py-2 rounded-xl border border-gray-200 focus:ring-2 focus:ring-navy focus:border-navy outline-none w-full md:w-64 transition-all"
+            className="w-full rounded-xl border border-gray-200 py-2 ps-10 pe-4 outline-none transition-all focus:border-navy focus:ring-2 focus:ring-navy/20"
           />
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
-        {docs.map((doc) => (
-          <Card key={doc.id} className="border-none shadow-lg shadow-navy/5 hover:shadow-xl hover:shadow-navy/10 transition-all group">
-            <CardContent className="p-6">
-              <div className="flex items-center">
-                <div className="h-12 w-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center me-4 group-hover:scale-110 transition-transform">
-                  <FileText className="h-6 w-6" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-base font-bold text-navy truncate">
-                    {isArabic ? doc.titleAr : doc.title}
-                  </h3>
-                  <p className="text-xs text-gray-500 mt-0.5">{doc.type} • {doc.size}</p>
-                </div>
-                <Button 
-                  variant="outline" 
-                  className="ms-4 p-2 h-10 w-10 flex items-center justify-center rounded-full border-gray-200 hover:bg-navy hover:text-white"
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        {docs.map((doc) => {
+          const title = isArabic ? doc.titleAr : doc.title;
+
+          return (
+            <Card
+              key={doc.id}
+              className="overflow-hidden border-none shadow-lg shadow-navy/5 transition-all hover:shadow-xl hover:shadow-navy/10"
+            >
+              <CardContent className="p-0">
+                <div
+                  dir={isArabic ? "rtl" : "ltr"}
+                  className="grid grid-cols-[2.75rem_minmax(0,1fr)_2.75rem] items-center gap-3 p-3 sm:p-4"
                 >
-                  <Download className="h-4 w-4" />
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-red-600">
+                    <FileText className="h-5 w-5" />
+                  </div>
+
+                  <div className="min-w-0">
+                    <h3 className="break-words text-sm font-semibold leading-5 text-navy sm:text-base">
+                      {title}
+                    </h3>
+                    <p className="mt-1 text-xs text-gray-500 sm:text-sm">
+                      {doc.type} • {doc.size}
+                    </p>
+                  </div>
+
+                  <div className="flex justify-end">
+                    <Button
+                      variant="outline"
+                      aria-label={isArabic ? "تحميل الوثيقة" : "Télécharger le document"}
+                      className="flex h-10 w-10 items-center justify-center rounded-xl border-gray-200 p-0 transition-colors hover:bg-navy hover:text-white"
+                    >
+                      <Download className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
     </div>
   );

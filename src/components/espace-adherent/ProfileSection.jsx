@@ -44,15 +44,15 @@ const ProfileSection = () => {
             </CardTitle>
           </CardHeader>
           <CardContent className="p-6 space-y-6 my-4">
-            <InfoItem 
+            <InfoItem
               icon={User} 
               label={t.fields.nom} 
-              value={user?.nom} 
+              value={user?.nom}
             />
-            <InfoItem 
+            <InfoItem
               icon={Mail} 
               label={t.fields.email} 
-              value={user?.email} 
+              value={user?.email}
             />
             <InfoItem 
               icon={Phone} 
@@ -72,7 +72,7 @@ const ProfileSection = () => {
           </CardHeader>
           <CardContent className="p-6 space-y-6 my-4">
             <InfoItem 
-              icon={Briefcase} 
+              icon={Briefcase}
               label={t.fields.lieu_travail} 
               value={user?.lieu_travail} 
             />
