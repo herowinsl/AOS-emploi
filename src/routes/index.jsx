@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import StatutsPage from "../components/about/StatutsPage";
 import ReglementPage from "../components/about/ReglementPage";
@@ -25,7 +25,7 @@ export function AppRoutes() {
       <Route path="/actualites" element={<ActualitiesPage />} />
       <Route path="/actualites/:slug" element={<ActualitiesDetailPage />} />
       <Route path="/contact" element={<ContactPage />} />
-...
+      ...
 
       {/* Auth */}
       <Route path="/auth" element={<AuthPage />} />
