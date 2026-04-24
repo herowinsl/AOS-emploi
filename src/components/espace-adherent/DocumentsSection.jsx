@@ -1,9 +1,7 @@
 import React from "react";
 import { useLang } from "../../context/LangContext";
 import { dashboardContent } from "./dashboardContent";
-import { Card, CardContent } from "../ui/card";
-import { FileText, Download, Search } from "lucide-react";
-import Button from "../common/Button";
+import { FileText, Search } from "lucide-react"; // Keep FileText for consistency/aesthetics in the table row
 
 const DocumentsSection = () => {
   const { lang } = useLang();
@@ -11,11 +9,15 @@ const DocumentsSection = () => {
   const isArabic = lang === "ar";
 
   const docs = [
-    { id: 1, title: "Formulaire d'adhésion", titleAr: "نموذج الانخراط", type: "PDF", size: "1.2 MB" },
-    { id: 2, title: "Demande de prêt social", titleAr: "طلب قرض اجتماعي", type: "PDF", size: "850 KB" },
-    { id: 3, title: "Convention RAM 2026", titleAr: "اتفاقية الخطوط الملكية المغربية 2026", type: "PDF", size: "2.4 MB" },
-    { id: 4, title: "Guide de l'adhérent", titleAr: "دليل المنخرط", type: "PDF", size: "5.1 MB" },
+    { id: 1, title: "Formulaire d'adhésion", titleAr: "نموذج الانخراط", type: "PDF", size: "1.2 MB", downloadLink: "/path/to/formulaire.pdf" },
+    { id: 2, title: "Demande de prêt social", titleAr: "طلب قرض اجتماعي", type: "PDF", size: "850 KB", downloadLink: "/path/to/pret.pdf" },
+    { id: 3, title: "Convention RAM 2026", titleAr: "اتفاقية الخطوط الملكية المغربية 2026", type: "PDF", size: "2.4 MB", downloadLink: "/path/to/convention.pdf" },
+    { id: 4, title: "Guide de l'adhérent", titleAr: "دليل المنخرط", type: "PDF", size: "5.1 MB", downloadLink: "/path/to/guide.pdf" },
   ];
+
+  const handleDownload = (doc) => {
+    window.open(doc.downloadLink, '_blank');
+  };
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -37,47 +39,57 @@ const DocumentsSection = () => {
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {docs.map((doc) => {
-          const title = isArabic ? doc.titleAr : doc.title;
-
-          return (
-            <Card
-              key={doc.id}
-              className="overflow-hidden border-none shadow-lg shadow-navy/5 transition-all hover:shadow-xl hover:shadow-navy/10"
-            >
-              <CardContent className="p-0">
-                <div
+      <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-lg shadow-navy/5">
+        <table className="min-w-full divide-y divide-gray-200 text-sm">
+          <thead className="bg-gray-50">
+            <tr>
+              <th
+                scope="col"
+                className={`px-4 py-3.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${isArabic ? "text-right" : "text-left"}`}
+              >
+                {isArabic ? "اسم الوثيقة" : "Document Name"}
+              </th>
+              <th
+                scope="col"
+                className={`px-4 py-3.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${isArabic ? "text-right" : "text-left"}`}
+              >
+                {isArabic ? "النوع" : "Type"}
+              </th>
+              <th
+                scope="col"
+                className={`px-4 py-3.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${isArabic ? "text-right" : "text-left"}`}
+              >
+                {isArabic ? "الحجم" : "Size"}
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200 bg-white">
+            {docs.map((doc) => {
+              const title = isArabic ? doc.titleAr : doc.title;
+              return (
+                <tr
+                  key={doc.id}
+                  onClick={() => handleDownload(doc)}
+                  className="group cursor-pointer transition-colors hover:bg-gray-50"
                   dir={isArabic ? "rtl" : "ltr"}
-                  className="grid grid-cols-[2.75rem_minmax(0,1fr)_2.75rem] items-center gap-3 p-3 sm:p-4"
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-red-50 text-red-600">
-                    <FileText className="h-5 w-5" />
-                  </div>
-
-                  <div className="min-w-0">
-                    <h3 className="break-words text-sm font-semibold leading-5 text-navy sm:text-base">
+                  <td className="whitespace-nowrap px-4 py-4 font-medium text-navy">
+                    <div className="flex items-center gap-3">
+                      <FileText className="h-5 w-5 text-red-600" />
                       {title}
-                    </h3>
-                    <p className="mt-1 text-xs text-gray-500 sm:text-sm">
-                      {doc.type} • {doc.size}
-                    </p>
-                  </div>
-
-                  <div className="flex justify-end">
-                    <Button
-                      variant="outline"
-                      aria-label={isArabic ? "تحميل الوثيقة" : "Télécharger le document"}
-                      className="flex h-10 w-10 items-center justify-center rounded-xl border-gray-200 p-0 transition-colors hover:bg-navy hover:text-white"
-                    >
-                      <Download className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
+                    </div>
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-4 text-gray-700">
+                    {doc.type}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-4 text-gray-700">
+                    {doc.size}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );
