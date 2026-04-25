@@ -7,11 +7,13 @@ function PageWrapper({ children }) {
   const { lang } = useLang();
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="flex flex-col min-h-screen bg-white text-gray-900">
+
       <Navbar />
       <AnimatePresence mode="wait">
         <motion.main
           key={lang}
+          className="flex-1"
           initial={{ opacity: 0, x: lang === "ar" ? 10 : -10 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: lang === "ar" ? -10 : 10 }}

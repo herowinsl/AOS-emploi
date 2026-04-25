@@ -80,7 +80,7 @@ function Footer() {
 
   return (
     <footer className="bg-navy-dark text-white">
-      <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 sm:py-10 lg:px-8 lg:py-16">
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-5">
           <div className="col-span-2 mb-4 lg:mb-0">
             <Link
