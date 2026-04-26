@@ -45,7 +45,7 @@ const Card = ({ heading, description, imgSrc, onClick, lang }) => {
       
       <div className="relative z-20 flex h-full flex-col justify-between p-6 text-white/90 transition-colors duration-500 group-hover:text-white">
         <ArrowRight 
-          className="ms-auto h-8 w-8 transition-transform duration-500 rtl:-scale-x-100 group-hover:-rotate-45" 
+          className="ms-auto h-8 w-8 transition-transform duration-500 rtl:-scale-x-100 group-hover:-rotate-45 rtl:group-hover:rotate-45" 
         />
         <div>
           <h4 className="mb-2">
