@@ -12,7 +12,6 @@ const defaultItems = [
     { id: 'overview', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'profile', label: 'Profil', icon: User },
     { id: 'documents', label: 'Documents', icon: FileText },
-    { id: 'notifications', label: 'Alertes', icon: Bell },
     { id: 'settings', label: 'Paramètres', icon: Settings },
 ];
 

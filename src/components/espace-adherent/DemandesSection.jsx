@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLang } from "../../context/LangContext";
 import useAuth from "../../hooks/useAuth";
 import { dashboardContent } from "./dashboardContent";
@@ -14,14 +14,7 @@ const DemandesSection = () => {
   
   const [selectedType, setSelectedType] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [history, setHistory] = useState([
-    {
-      id: "REQ-001",
-      date: "2023-11-15",
-      type: t.types.vacation.title,
-      status: "approved"
-    }
-  ]);
+  const [history, setHistory] = useState([]);
 
   const cardsData = [
     {

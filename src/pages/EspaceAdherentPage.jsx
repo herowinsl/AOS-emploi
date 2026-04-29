@@ -15,14 +15,12 @@ const mobileMenuContent = {
     { id: 'overview', label: 'Tableau', icon: LayoutDashboard },
     { id: 'profile', label: 'Profil', icon: User },
     { id: 'documents', label: 'Docs', icon: FileText },
-    { id: 'notifications', label: 'Alertes', icon: Bell },
     { id: 'demandes', label: 'Demandes', icon: ClipboardList },
   ],
   ar: [
     { id: 'overview', label: 'الرئيسية', icon: LayoutDashboard },
     { id: 'profile', label: 'ملفي', icon: User },
     { id: 'documents', label: 'وثائقي', icon: FileText },
-    { id: 'notifications', label: 'تنبيهات', icon: Bell },
     { id: 'demandes', label: 'الطلبات', icon: ClipboardList },
   ]
 };
@@ -42,17 +40,6 @@ function EspaceAdherentPage() {
         return <ProfileSection />;
       case "documents":
         return <DocumentsSection />;
-      case "notifications":
-        return (
-          <div className="flex flex-col items-center justify-center py-24 text-center">
-            <div className="h-16 w-16 rounded-full bg-gray-50 flex items-center justify-center mb-4">
-              <Bell className="h-8 w-8 text-gray-400" />
-            </div>
-            <p className="text-gray-500">
-              {isArabic ? "ليس لديك أي إشعارات جديدة." : "Vous n'avez pas de nouvelles notifications."}
-            </p>
-          </div>
-        );
       case "demandes":
         return <DemandesSection />;
       default:

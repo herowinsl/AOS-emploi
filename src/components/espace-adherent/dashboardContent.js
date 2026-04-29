@@ -6,7 +6,6 @@ export const dashboardContent = {
       overview: "Tableau de bord",
       profile: "Mon Profil",
       documents: "Mes Documents",
-      notifications: "Notifications",
       demandes: "Mes Demandes",
     },
     overview: {
@@ -36,10 +35,6 @@ export const dashboardContent = {
       description: "Retrouvez ici tous les formulaires et documents administratifs de l'AOS.",
       download: "Télécharger",
       noDocs: "Aucun document disponible pour le moment.",
-    },
-    notifications: {
-      title: "Notifications",
-      empty: "Vous n'avez pas de nouvelles notifications.",
     },
     demandes: {
       title: "Mes Demandes",
@@ -80,9 +75,9 @@ export const dashboardContent = {
       },
       tableHeaders: {
         id: "ID Demande",
-        date: "Date",
-        type: "Type",
-        status: "Statut"
+        date: "التاريخ",
+        type: "النوع",
+        status: "الحالة"
       }
     }
   },
@@ -91,7 +86,6 @@ export const dashboardContent = {
       overview: "لوحة التحكم",
       profile: "ملفي الشخصي",
       documents: "وثائقي",
-      notifications: "الإشعارات",
       demandes: "طلباتي",
     },
     overview: {
@@ -121,10 +115,6 @@ export const dashboardContent = {
       description: "تجدون هنا جميع النماذج والوثائق الإدارية الخاصة بـ AOS.",
       download: "تحميل",
       noDocs: "لا توجد وثائق متاحة حاليا.",
-    },
-    notifications: {
-      title: "الإشعارات",
-      empty: "ليس لديك أي إشعارات جديدة.",
     },
     demandes: {
       title: "طلباتي",
@@ -177,6 +167,5 @@ export const sidebarItems = [
   { id: "overview", labelKey: "overview", icon: LayoutDashboard },
   { id: "profile", labelKey: "profile", icon: User },
   { id: "documents", labelKey: "documents", icon: FileText },
-  { id: "notifications", labelKey: "notifications", icon: Bell },
   { id: "demandes", labelKey: "demandes", icon: ClipboardList },
 ];

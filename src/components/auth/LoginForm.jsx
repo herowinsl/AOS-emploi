@@ -120,16 +120,7 @@ function LoginForm() {
         )}
       </button>
 
-      {import.meta.env.DEV && (
-        <div className="rounded-lg border border-navy/10 bg-navy/5 px-4 py-3 text-xs text-navy/70">
-          <div className="flex items-center gap-2 mb-1.5">
-            <div className="h-1.5 w-1.5 rounded-full bg-navy/40" />
-            <strong className="font-semibold text-navy/90 uppercase tracking-wider text-[10px]">Mock Access</strong>
-          </div>
-          <p>Email: <code className="font-mono text-navy">ilyas@ministere.gov.ma</code></p>
-          <p>Key: <code className="font-mono text-navy">AOS-2026-K7X3-M9QP</code></p>
-        </div>
-      )}
+
     </form>
   );
 }
